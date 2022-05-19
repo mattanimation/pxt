@@ -442,6 +442,17 @@ export const ExtensionsBrowser = (props: ExtensionsProps) => {
                             />
                         </div>
                     }
+                    <div className="column right aligned" style={{ zIndex: 1 }}>
+                        <Button
+                            title={lf("Import File")}
+                            key="import"
+                            label={lf("Import File")}
+                            className="import-dialog-btn"
+                            onClick={() => handleCategoryClick}
+                            onKeydown={() => handleCategoryClick}
+                            // className={"extension-tag " + ("selected")}
+                        />
+                    </div>
                     {displayMode == ExtensionView.Search &&
                         <div>
                             <div className="ui cards left">
