@@ -413,10 +413,12 @@ export const ExtensionsBrowser = (props: ExtensionsProps) => {
                 </div>
                 <div className="extension-display">
                     {displayMode == ExtensionView.Search &&
+                        <div className="breadcrumbs">
+                            <span className="link" onClick={handleHomeButtonClick}>{lf("Home")}</span>
+                        </div>
+                    }
+                    {displayMode == ExtensionView.Search &&
                         <div>
-                            <div className="breadcrumbs">
-                                <span className="link" onClick={handleHomeButtonClick}>{lf("Home")}</span>
-                            </div>
                             <div className="ui cards left">
                                 {extensionsToShow?.map((scr, index) =>
                                     <ExtensionCard
@@ -440,12 +442,14 @@ export const ExtensionsBrowser = (props: ExtensionsProps) => {
                         </div>
                     }
                     {displayMode == ExtensionView.Tags &&
-                        <div>
                             <div className="breadcrumbs">
                                 <span className="link" onClick={handleHomeButtonClick}>{lf("Home")}</span>
                                 <span>/</span>
                                 <span>{selectedTag}</span>
                             </div>
+                    }
+                    {displayMode == ExtensionView.Tags &&
+                        <div>
                             <div className="ui cards left">
                                 {extensionsToShow?.map((scr, index) =>
                                     <ExtensionCard
@@ -463,23 +467,25 @@ export const ExtensionsBrowser = (props: ExtensionsProps) => {
                             </div>
                         </div>}
                     {displayMode == ExtensionView.Tabbed &&
+                        <div className="tab-header">
+                            <Button
+                                key={"Recommended"}
+                                title={lf("Recommended")}
+                                label={lf("Recommended")}
+                                onClick={() => { setCurrentTab(TabState.Recommended) }}
+                                className={currentTab == TabState.Recommended ? "selected" : ""}
+                            />
+                            <Button
+                                key={"In Development"}
+                                title={lf("In Development")}
+                                label={lf("In Development")}
+                                onClick={() => { setCurrentTab(TabState.InDevelopment) }}
+                                className={currentTab == TabState.InDevelopment ? "selected" : ""}
+                            />
+                        </div>
+                    }
+                    {displayMode == ExtensionView.Tabbed &&
                         <div>
-                            <div className="tab-header">
-                                <Button
-                                    key={"Recommended"}
-                                    title={lf("Recommended")}
-                                    label={lf("Recommended")}
-                                    onClick={() => { setCurrentTab(TabState.Recommended) }}
-                                    className={currentTab == TabState.Recommended ? "selected" : ""}
-                                />
-                                <Button
-                                    key={"In Development"}
-                                    title={lf("In Development")}
-                                    label={lf("In Development")}
-                                    onClick={() => { setCurrentTab(TabState.InDevelopment) }}
-                                    className={currentTab == TabState.InDevelopment ? "selected" : ""}
-                                />
-                            </div>
                             <div className="ui cards left">
                                 {currentTab == TabState.Recommended && preferredExts.map((e, index) =>
                                     <ExtensionCard
